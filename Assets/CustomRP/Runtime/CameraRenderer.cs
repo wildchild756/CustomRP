@@ -19,7 +19,13 @@ public partial class CameraRenderer
         buffer.name = bufferName;
     }
     
-    public void Render(ScriptableRenderContext context, Camera camera)
+    public void Render
+    (
+        ScriptableRenderContext context, 
+        Camera camera,
+        bool useDynamicBatching,
+        bool useGPUInstancing
+    )
     {
         this.context = context;
         this.camera = camera;
@@ -32,7 +38,7 @@ public partial class CameraRenderer
         }
 
         Setup();
-        DrawVisibleGeometry();
+        DrawVisibleGeometry(useDynamicBatching, useGPUInstancing);
         DrawUnsupportedShaders();
         DrawGizmos();
         Submit();
@@ -63,12 +69,16 @@ public partial class CameraRenderer
         buffer.Clear();
     }
 
-    void DrawVisibleGeometry()
+    void DrawVisibleGeometry(bool useDynamicBatching, bool useGPUInstancing)
     {
         var sortingSettings = new SortingSettings(camera);
         sortingSettings.criteria = SortingCriteria.CommonOpaque;
         
-        var drawingSettings = new DrawingSettings(unlitShaderTagId, sortingSettings);
+        var drawingSettings = new DrawingSettings(unlitShaderTagId, sortingSettings)
+        {
+            enableDynamicBatching = useDynamicBatching,
+            enableInstancing = useGPUInstancing
+        };
         var filteringSettings = new FilteringSettings(RenderQueueRange.opaque);
 
         context.DrawRenderers(cullingResults, ref drawingSettings, ref filteringSettings);
@@ -86,7 +96,6 @@ public partial class CameraRenderer
         if(camera.TryGetCullingParameters(out ScriptableCullingParameters p))
         {
             cullingResults = context.Cull(ref p);
-            // Debug.Log(cullingResults.visibleLights);
             return true;
         }
         return false;
