@@ -15,18 +15,6 @@ public class CustomShaderGUI : ShaderGUI
         Dither,
         Off
     }
-    ShadowMode Shadows
-    {
-        set
-        {
-            if(SetProperty("_Shadows", (float)value))
-            {
-                SetKeyword("_SHADOWS_CLIP", value == ShadowMode.Clip);
-                SetKeyword("_SHADOWS_DITHER", value == ShadowMode.Dither);
-            }
-        }
-    }
-
     public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
         EditorGUI.BeginChangeCheck();
@@ -110,6 +98,20 @@ public class CustomShaderGUI : ShaderGUI
     bool ZWrite
     {
         set => SetProperty("_ZWrite", value ? 1.0f : 0.0f);
+    }
+
+    ShadowMode Shadows
+    {
+        set
+        {
+            Debug.Log(value);
+            if(SetProperty("_Shadows", (float)value))
+            {
+                Debug.Log("Set");
+                SetKeyword("_SHADOWS_CLIP", value == ShadowMode.Clip);
+                SetKeyword("_SHADOWS_DITHER", value == ShadowMode.Dither);
+            }
+        }
     }
 
     RenderQueue RenderQueue
@@ -196,6 +198,7 @@ public class CustomShaderGUI : ShaderGUI
         foreach(Material m in materials)
         {
             m.SetShaderPassEnabled("ShadowCaster", enabled);
+            Shadows = (ShadowMode)m.GetFloat("_Shadows");
         }
     }
 
