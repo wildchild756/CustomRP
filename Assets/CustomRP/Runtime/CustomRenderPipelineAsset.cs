@@ -7,13 +7,16 @@ using UnityEngine.Rendering;
 public class CustomRenderPipelineAsset : RenderPipelineAsset
 {
     [SerializeField]
-    bool useDynamicBatching = false, useGPUInstancing = true, useSRPBatcher = true;
+    bool useDynamicBatching = false;
+    bool useGPUInstancing = true;
+    bool useSRPBatcher = true;
+    bool useLightsPerObject = true;
     [SerializeField]
     ShadowSettings shadows = default;
 
     protected override RenderPipeline CreatePipeline()
     {
         // Debug.Log("CreatePipeline");
-        return new CustomRenderPipeline(useDynamicBatching, useGPUInstancing, useSRPBatcher, shadows);
+        return new CustomRenderPipeline(useDynamicBatching, useGPUInstancing, useSRPBatcher, useLightsPerObject, shadows);
     }
 }

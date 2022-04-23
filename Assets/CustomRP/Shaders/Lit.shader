@@ -60,6 +60,7 @@ Shader "CustomRP/Lit"
             #pragma multi_compile _ LIGHTMAP_ON
             #pragma multi_compile _ _instancing
             #pragma multi_compile _ LOD_FADE_CROSSFADE
+            #pragma multi_compile _ _LIGHTS_PER_OBJECT
             #pragma vertex LitPassVertex
             #pragma fragment LitPassFragment
             #include "LitPass.hlsl"
