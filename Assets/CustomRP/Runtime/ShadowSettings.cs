@@ -42,6 +42,13 @@ public class ShadowSettings
         public CascadeBlendMode cascadeBlend;
     }
 
+    [System.Serializable]
+    public struct Other
+    {
+        public TextureSize atlasSize;
+        public FilterMode filter;
+    }
+
     public enum FilterMode
     {
         PCF2x2, PCF3x3, PCF5x5, PCF7x7
@@ -56,6 +63,11 @@ public class ShadowSettings
         cascadeRatio3 = 0.5f,
         cascadeFade = 0.1f,
         cascadeBlend = Directional.CascadeBlendMode.Hard
+    };
+
+    public Other other = new Other{
+        atlasSize = TextureSize._1024,
+        filter = FilterMode.PCF2x2
     };
 
 }
