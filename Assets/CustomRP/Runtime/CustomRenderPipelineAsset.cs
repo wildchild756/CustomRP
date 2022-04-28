@@ -13,10 +13,12 @@ public class CustomRenderPipelineAsset : RenderPipelineAsset
     bool useLightsPerObject = true;
     [SerializeField]
     ShadowSettings shadows = default;
+    [SerializeField]
+    PostFXSettings postFXSettings = default;
 
     protected override RenderPipeline CreatePipeline()
     {
         // Debug.Log("CreatePipeline");
-        return new CustomRenderPipeline(useDynamicBatching, useGPUInstancing, useSRPBatcher, useLightsPerObject, shadows);
+        return new CustomRenderPipeline(useDynamicBatching, useGPUInstancing, useSRPBatcher, useLightsPerObject, shadows, postFXSettings);
     }
 }
