@@ -13,6 +13,83 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
+            Name "BloomAdd"
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment BloomAddPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "BloomHorizontal"
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment BloomHorizontalPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "BloomPerfilter"
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment BloomPerfilterPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "BloomPerfilterFireflies"
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment BloomPerfilterFirefliesPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "BloomScatter"
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment BloomScatterPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "BloomScatterFinal"
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment BloomScatterFinalPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "BloomVertical"
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment BloomVerticalPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
             Name "Copy"
 
             HLSLPROGRAM
@@ -24,46 +101,36 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "Bloom Horizontal"
+            Name "ToneMappingACES"
 
             HLSLPROGRAM
                 #pragma target 3.5
                 #pragma vertex DefaultPassVertex
-                #pragma fragment BloomHorizontalPassFragment
+                #pragma fragment ToneMappingACESPassFragment
             ENDHLSL
         }
 
         Pass
         {
-            Name "Bloom Vertical"
+            Name "ToneMappingNeutral"
 
             HLSLPROGRAM
                 #pragma target 3.5
                 #pragma vertex DefaultPassVertex
-                #pragma fragment BloomVerticalPassFragment
+                #pragma fragment ToneMappingNeutralPassFragment
             ENDHLSL
         }
 
         Pass
         {
-            Name "Bloom Combine"
+            Name "ToneMappingReinhard"
 
             HLSLPROGRAM
                 #pragma target 3.5
                 #pragma vertex DefaultPassVertex
-                #pragma fragment BloomCombinePassFragment
+                #pragma fragment ToneMappingReinhardPassFragment
             ENDHLSL
         }
 
-        Pass
-        {
-            Name "Bloom Perfilter"
-
-            HLSLPROGRAM
-                #pragma target 3.5
-                #pragma vertex DefaultPassVertex
-                #pragma fragment BloomPerfilterPassFragment
-            ENDHLSL
-        }
     }
 }
