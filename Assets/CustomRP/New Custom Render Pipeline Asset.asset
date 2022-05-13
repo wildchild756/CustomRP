@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: New Custom Render Pipeline Asset
   m_EditorClassIdentifier: 
   useDynamicBatching: 0
+  useGPUInstancing: 1
+  useSRPBatcher: 1
+  useLightsPerObject: 1
+  cameraBuffer:
+    allowHDR: 1
+    copyColor: 1
+    copyColorReflections: 0
+    copyDepth: 1
+    copyDepthReflections: 0
   shadows:
     maxDistance: 100
     distanceFade: 0.1
@@ -29,3 +38,5 @@ MonoBehaviour:
       atlasSize: 1024
       filter: 1
   postFXSettings: {fileID: 11400000, guid: 342a6c777c7daf247ba692bca50adac6, type: 2}
+  colorLUTResolution: 32
+  cameraRendererShader: {fileID: 4800000, guid: c1d1282939e0d8c4ca98f33460071770, type: 3}
