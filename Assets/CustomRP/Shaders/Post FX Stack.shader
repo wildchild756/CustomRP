@@ -13,7 +13,31 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "BloomAdd"
+            Name "Apply Color Grading"
+
+            Blend [_FinalSrcBlend] [_FinalDstBlend]
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment ApplyColorGradingPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "Apply Color Grading With Luma"
+
+            HLSLPROGRAM
+                #pragma 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment ApplyColorGradingWithLumaPassFragment
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "Bloom Add"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -24,7 +48,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "BloomHorizontal"
+            Name "Bloom Horizontal"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -35,7 +59,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "BloomPerfilter"
+            Name "Bloom Perfilter"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -46,7 +70,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "BloomPerfilterFireflies"
+            Name "Bloom Perfilter Fireflies"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -57,7 +81,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "BloomScatter"
+            Name "Bloom Scatter"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -68,7 +92,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "BloomScatterFinal"
+            Name "Bloom Scatter Final"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -79,7 +103,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "BloomVertical"
+            Name "Bloom Vertical"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -101,7 +125,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "ColorGradingNone"
+            Name "Color Grading None"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -112,7 +136,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "ColorGradingACES"
+            Name "Color Grading ACES"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -123,7 +147,7 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "ColorGradingNeutral"
+            Name "Color Grading Neutral"
 
             HLSLPROGRAM
                 #pragma target 3.5
@@ -134,25 +158,12 @@ Shader "Hidden/Custom RP/Post FX Stack"
 
         Pass
         {
-            Name "ColorGradingReinhard"
+            Name "Color Grading Reinhard"
 
             HLSLPROGRAM
                 #pragma target 3.5
                 #pragma vertex DefaultPassVertex
                 #pragma fragment ColorGradingReinhardPassFragment
-            ENDHLSL
-        }
-
-        Pass
-        {
-            Name "Final"
-
-            Blend [_FinalSrcBlend] [_FinalDstBlend]
-
-            HLSLPROGRAM
-                #pragma target 3.5
-                #pragma vertex DefaultPassVertex
-                #pragma fragment FinalPassFragment
             ENDHLSL
         }
 
@@ -166,6 +177,35 @@ Shader "Hidden/Custom RP/Post FX Stack"
                 #pragma target 3.5
                 #pragma vertex DefaultPassVertex
                 #pragma fragment FinalPassFragmentRescale
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "FXAA"
+
+            Blend [_FinalSrcBlend] [_FinalDstBlend]
+
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment FXAAPassFragment
+                #include "FXAAPass.hlsl"
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "FXAA With Luma"
+
+            Blend [_FinalSrcBlend] [_FinalDstBlend]
+            HLSLPROGRAM
+                #pragma target 3.5
+                #pragma vertex DefaultPassVertex
+                #pragma fragment FXAAPassFragment
+                #pragma multi_compile _ FXAA_QUALITY_MEDIUM FXAA_QUALITY_LOW
+                #define FXAA_ALPHA_CONTAINS_LUMA
+                #include "FXAAPass.hlsl"
             ENDHLSL
         }
 

@@ -30,6 +30,8 @@ public class CameraSettings
 
     public bool overridePostFX = false;
     public PostFXSettings postFXSettings = default;
+    public bool allowFXAA = false;
+    public bool keepAlpha = false;
     public FinalBlendMode finalBlendMode = new FinalBlendMode{
         source = BlendMode.One,
         destination = BlendMode.Zero

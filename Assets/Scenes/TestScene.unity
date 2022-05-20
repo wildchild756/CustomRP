@@ -10949,8 +10949,12 @@ MonoBehaviour:
     copyDepth: 1
     renderingLayerMask: 2147483646
     maskLights: 1
+    renderScaleMode: 0
+    renderScale: 1
     overridePostFX: 0
     postFXSettings: {fileID: 11400000, guid: 342a6c777c7daf247ba692bca50adac6, type: 2}
+    allowFXAA: 1
+    keepAlpha: 1
     finalBlendMode:
       source: 1
       destination: 10
@@ -11922,8 +11926,12 @@ MonoBehaviour:
     copyDepth: 1
     renderingLayerMask: 2147483645
     maskLights: 1
+    renderScaleMode: 0
+    renderScale: 1
     overridePostFX: 0
     postFXSettings: {fileID: 0}
+    allowFXAA: 1
+    keepAlpha: 1
     finalBlendMode:
       source: 1
       destination: 10
